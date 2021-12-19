@@ -1,3 +1,7 @@
 {
-  "recommendations": ["jonkwheeler.styled-components-snippets", "diegolincoln.vscode-styled-components"]
+  "recommendations": [
+    "jonkwheeler.styled-components-snippets",
+    "diegolincoln.vscode-styled-components",
+    "mf.vscode-styled-components"
+  ]
 }
