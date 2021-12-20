@@ -5,7 +5,7 @@ const Father = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
   width: 100px;
   height: 100px;
 `;
@@ -13,7 +13,7 @@ const Box = styled.div`
 // styled(A)
 // A 속성그대로 + 추가옵션
 const Circle = styled(Box)`
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
   border-radius: 50px;
 `;
 
