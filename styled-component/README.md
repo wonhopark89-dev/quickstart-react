@@ -6,6 +6,15 @@
 - typescript setting
 - https://create-react-app.dev/docs/adding-typescript/#installation
 
+- react-router-dom v5
+
+- reset css
+- https://github.com/zacanger/styled-reset/blob/master/src/index.ts
+
+- font
+- https://fonts.google.com/specimen/Source+Sans+Pro
+- https://flatuicolors.com/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
