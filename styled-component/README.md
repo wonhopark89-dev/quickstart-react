@@ -3,6 +3,9 @@
 - styled-components (auto)
 - https://marketplace.visualstudio.com/items?itemName=diegolincoln.vscode-styled-components
 
+- typescript setting
+- https://create-react-app.dev/docs/adding-typescript/#installation
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
