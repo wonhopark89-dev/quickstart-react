@@ -9,9 +9,6 @@ const Router = () => {
         <Route path='/:coinId'>
           <Coins />
         </Route>
-        <Route path='/'>
-          <Coins />
-        </Route>
       </Switch>
     </BrowserRouter>
   );
