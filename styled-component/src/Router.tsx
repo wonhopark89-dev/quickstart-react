@@ -7,6 +7,9 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Route path='/:coinId'>
+          <Coin />
+        </Route>
+        <Route path='/'>
           <Coins />
         </Route>
       </Switch>

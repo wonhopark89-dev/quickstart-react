@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // sample : https://api.coinpaprika.com/v1/coins
-const Containter = styled.div`
+const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
@@ -66,6 +66,7 @@ interface CoinInterface {
   type: string;
 }
 
+// https://v5.reactrouter.com/web/api/Link
 const Coins = () => {
   const [coins, setCoins] = useState<CoinInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -81,7 +82,7 @@ const Coins = () => {
   }, []);
 
   return (
-    <Containter>
+    <Container>
       <Header>
         <Title>코인</Title>
       </Header>
@@ -91,7 +92,11 @@ const Coins = () => {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>
+              <Link
+                to={{
+                  pathname: `/${coin.id}`,
+                  state: { name: coin.name },
+                }}>
                 <Img src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} />
                 {coin.name} &rarr;
               </Link>
@@ -99,7 +104,7 @@ const Coins = () => {
           ))}
         </CoinsList>
       )}
-    </Containter>
+    </Container>
   );
 };
 
