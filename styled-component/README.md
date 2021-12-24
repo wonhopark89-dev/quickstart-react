@@ -8,12 +8,20 @@
 
 - react-router-dom v5
 
+```
+react-router는 코어까지 들어있는 master 브랜치에 있는 라이브러리 입니다.
+그리고 react-router-dom은 그 중에서 DOM이 인식할 수 있는 컴포넌트들만 뺀 라이브러리 입니다. 예를 들어 <Link>(a태그로 렌더링되는), <BrowserRouter>와 같은 컴포넌트들이 있습니다
+```
+
 - reset css
 - https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 
 - font
 - https://fonts.google.com/specimen/Source+Sans+Pro
 - https://flatuicolors.com/
+
+- a ( anchor )
+- anchor 는 페이지 전체를 새로고침 -> <Link/> 이용
 
 # Getting Started with Create React App
 
