@@ -84,6 +84,7 @@ const Coins = () => {
 
   // 첫번째 인자 :고유 키값
   // 두번째 함수는 무조건 Promise 리턴해야함
+  // useQuery 는 기본적으로 response 를 caching 하고 있음
   const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchConins);
 
   return (

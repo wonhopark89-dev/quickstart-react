@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { useLocation, useParams, Switch, Route, useRouteMatch, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { fetchCoinInfo, fetchCoinTickers } from '../api';
 import Chart from './Chart';
 import Price from './Price';
 
@@ -135,29 +137,38 @@ const Tab = styled.span<{ isActive: boolean }>`
 
 // 직접 url 접근 하면 status 가 없기 때문에 optional check
 const Coin = () => {
-  const [loading, setLoading] = useState<boolean>(true);
   const { coinId } = useParams<RouteParams>(); // 경로에 있는 값을 받음
-  const { state } = useLocation<RouteState>(); // Link 의 to - state
-  const [info, setInfo] = useState<InfoData>();
-  const [priceInfo, setPriceInfo] = useState<PriceData>();
   const priceMatch = useRouteMatch('/:coinId/price'); // Nested Route 값 비교
   const chartMatch = useRouteMatch('/:coinId/chart');
+  const { state } = useLocation<RouteState>(); // Link 의 to - state
 
-  // 캡슐화
-  useEffect(() => {
-    (async () => {
-      const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-      const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-      setInfo(infoData);
-      setPriceInfo(priceData);
-      setLoading(false);
-    })();
-  }, [coinId]);
+  // const [loading, setLoading] = useState<boolean>(true);
+  // const [info, setInfo] = useState<InfoData>();
+  // const [priceInfo, setPriceInfo] = useState<PriceData>();
+
+  // // 캡슐화
+  // useEffect(() => {
+  //   (async () => {
+  //     const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
+  //     const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
+  //     setInfo(infoData);
+  //     setPriceInfo(priceData);
+  //     setLoading(false);
+  //   })();
+  // }, [coinId]);
+
+  // react-query key 는 배열로 저장됨
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(['info', coinId], () => fetchCoinInfo(coinId));
+  const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(['ticker', coinId], () =>
+    fetchCoinTickers(coinId),
+  );
+
+  const loading = infoLoading || tickersLoading;
 
   return (
     <Container>
       <Header>
-        <Title>{state?.name ? state.name : loading ? 'Loading...' : info?.name}</Title>
+        <Title>{state?.name ? state.name : loading ? 'Loading...' : infoData?.name}</Title>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -166,26 +177,26 @@ const Coin = () => {
           <Overview>
             <OverviewItem>
               <span>Rank:</span>
-              <span>{info?.rank}</span>
+              <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
               <span>Symbol:</span>
-              <span>${info?.symbol}</span>
+              <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
               <span>Open Source:</span>
-              <span>{info?.open_source ? 'Yes' : 'No'}</span>
+              <span>{infoData?.open_source ? 'Yes' : 'No'}</span>
             </OverviewItem>
           </Overview>
-          <Description>{info?.description}</Description>
+          <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
               <span>Total Suply:</span>
-              <span>{priceInfo?.total_supply}</span>
+              <span>{tickersData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
               <span>Max Supply:</span>
-              <span>{priceInfo?.max_supply}</span>
+              <span>{tickersData?.max_supply}</span>
             </OverviewItem>
           </Overview>
 

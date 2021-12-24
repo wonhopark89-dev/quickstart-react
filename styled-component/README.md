@@ -23,6 +23,8 @@ react-router는 코어까지 들어있는 master 브랜치에 있는 라이브�
 - a ( anchor )
 - anchor 는 페이지 전체를 새로고침 -> <Link/> 이용
 
+- https://react-query.tanstack.com/devtools#import-the-devtools
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

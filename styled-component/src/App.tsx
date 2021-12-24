@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import Router from './Router';
 
+import { ReactQueryDevtools } from 'react-query/devtools';
+
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -20,7 +22,7 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
+  font-size: 100%; 
   font: inherit;
   vertical-align: baseline;
 }
@@ -76,6 +78,7 @@ function App() {
     <>
       <GlobalStyle />
       <Router />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }
