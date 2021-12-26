@@ -24,6 +24,8 @@ react-router는 코어까지 들어있는 master 브랜치에 있는 라이브�
 - anchor 는 페이지 전체를 새로고침 -> <Link/> 이용
 
 - https://react-query.tanstack.com/devtools#import-the-devtools
+- https://apexcharts.com/
+- https://apexcharts.com/docs/react-charts/
 
 # Getting Started with Create React App
 
