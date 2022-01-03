@@ -22,11 +22,12 @@ const Header = styled.header`
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
 
   border-radius: 15px;
   margin-bottom: 10px;
+  border: 1px solid white;
 
   a {
     /* Link 선언 부분 -> inpect 에서 a 되는 것 확인 */
