@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useLocation, useParams, Switch, Route, useRouteMatch, Link } from 'react-router-dom';
+import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
 import Chart from './Chart';

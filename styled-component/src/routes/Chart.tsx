@@ -28,7 +28,7 @@ function Chart({ coinId }: ChartProps) {
         'Loading ...'
       ) : (
         <ApexChart
-          type='line'
+          type="line"
           series={[
             {
               name: 'Price',

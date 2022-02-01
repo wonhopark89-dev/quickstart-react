@@ -3,7 +3,7 @@ import Router from './Router';
 
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useState } from 'react';
-import { lightTheme, darkTheme } from './theme';
+import { darkTheme, lightTheme } from './theme';
 
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
