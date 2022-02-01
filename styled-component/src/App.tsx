@@ -4,6 +4,8 @@ import Router from './Router';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useState } from 'react';
 import { darkTheme, lightTheme } from './theme';
+import { useRecoilValue } from 'recoil';
+import { isDarkAtom } from './atoms';
 
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
@@ -68,7 +70,7 @@ body {
   color: ${(props) => props.theme.textColor};
   line-height: 1.2;
 }
-
+ 
 a {
   text-decoration: none;
   color:inherit;
@@ -76,12 +78,11 @@ a {
 `;
 
 function App() {
-  const [isDark, setIsDark] = useState<boolean>(false);
-  const toggleDark = () => setIsDark((current) => !current);
+  const isDark = useRecoilValue(isDarkAtom);
+
   return (
     <>
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <button onClick={toggleDark}>Toggle Mode</button>
         <GlobalStyle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
