@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { fetchConins } from '../api';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../atoms';
 
 // sample : https://api.coinpaprika.com/v1/coins
 const Container = styled.div`
@@ -87,6 +89,8 @@ const Coins = () => {
   // 두번째 함수는 무조건 Promise 리턴해야함
   // useQuery 는 기본적으로 response 를 caching 하고 있음
   const { isLoading, data } = useQuery<ICoin[]>('allCoins', fetchConins);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
 
   return (
     <Container>
@@ -95,6 +99,7 @@ const Coins = () => {
       </Helmet>
       <Header>
         <Title>코인</Title>
+        <button onClick={() => toggleDarkAtom()}>Toggle</button>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
