@@ -2,6 +2,7 @@ import React from 'react';
 import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import {darkTheme} from './theme';
+import ToDoList from './ToDoList';
 
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
@@ -76,7 +77,8 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
-        <ReactQueryDevtools initialIsOpen={true} />
+        <ToDoList />
+        <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
     </>
   );
