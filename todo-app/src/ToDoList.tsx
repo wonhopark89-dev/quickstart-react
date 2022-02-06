@@ -48,6 +48,7 @@ const ToDoList = () => {
     handleSubmit,
     formState: {errors},
     setError,
+    setValue,
   } = useForm<IForm>({
     defaultValues: {
       email: '@gmail.com',
@@ -57,9 +58,24 @@ const ToDoList = () => {
 
   const onValid = (data: IForm) => {
     if (data.password !== data.password1) {
-      setError('extraError', {message: 'Password are not the same'}, {shouldFocus: true});
+      setError('password1', {message: 'Password are not the same'}, {shouldFocus: true});
+      return;
+    } else {
     }
+
+    // clear all
+    setValue('email', '');
+    setValue('firstName', '');
+    setValue('lastName', '');
+    setValue('username', '');
+    setValue('password', '');
+    setValue('password1', '');
+    //
+    // global error
+    // setError('extraError', {message: 'Server offline.'});
   };
+
+  console.log(errors);
 
   return (
     <div>
