@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 
-// const ToDoList = () => {
+// const ToDoListDraft = () => {
 //   const [todo, setTodo] = useState<string>('');
 //   const [todoError, setToDoError] = useState<string>('');
 //
@@ -42,7 +42,7 @@ interface IForm {
 }
 
 // react-hook-form 활용
-const ToDoList = () => {
+const ToDoListDraft = () => {
   const {
     register,
     handleSubmit,
@@ -136,7 +136,7 @@ const ToDoList = () => {
   );
 };
 
-export default ToDoList;
+export default ToDoListDraft;
 
 // handleSubmit 은 성공,실패 각 callback 을 설정할 수 있음 ( 성공값은 필수 )
 // required 를 html-input 컴포넌트에 적용하면 html 에서 체크해줌

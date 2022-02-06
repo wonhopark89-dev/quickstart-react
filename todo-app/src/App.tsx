@@ -2,7 +2,7 @@ import React from 'react';
 import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import {darkTheme} from './theme';
-import ToDoList from './ToDoList';
+import ToDoList from './components/ToDoList';
 
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
@@ -13,7 +13,7 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
-dl, dt, dd, menu, ol, ul, li,
+dl, dt, dd, menu, ol, ul, li, 
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
