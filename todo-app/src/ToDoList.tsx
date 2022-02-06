@@ -38,6 +38,7 @@ interface IForm {
   username: string;
   password: string;
   password1: string;
+  extraError?: string;
 }
 
 // react-hook-form 활용
@@ -46,6 +47,7 @@ const ToDoList = () => {
     register,
     handleSubmit,
     formState: {errors},
+    setError,
   } = useForm<IForm>({
     defaultValues: {
       email: '@gmail.com',
@@ -53,8 +55,10 @@ const ToDoList = () => {
   });
   // console.log(register('test')); // {name: 'test', onChange: ƒ, onBlur: ƒ, ref: ƒ}
 
-  const onValid = (data: any) => {
-    // console.log(data);
+  const onValid = (data: IForm) => {
+    if (data.password !== data.password1) {
+      setError('extraError', {message: 'Password are not the same'}, {shouldFocus: true});
+    }
   };
 
   return (
@@ -71,7 +75,17 @@ const ToDoList = () => {
           placeholder={'Email'}
         />
         <span>{errors?.email?.message}</span>
-        <input {...register('firstName', {required: 'write here'})} placeholder={'First Name'} />
+        <input
+          {...register('firstName', {
+            required: 'write here',
+            validate: {
+              // 에러가 있으면 false 나 string 값을 리턴 시킨다.
+              noTomato: value => (value.includes('tomato') ? 'no tomato allowed' : true),
+              noCarrot: value => (value.includes('carrot') ? 'no carrot allowed' : true),
+            },
+          })}
+          placeholder={'First Name'}
+        />
         <span>{errors?.firstName?.message}</span>
         <input {...register('lastName', {required: 'write here'})} placeholder={'Last Name'} />
         <span>{errors?.lastName?.message}</span>
@@ -100,6 +114,7 @@ const ToDoList = () => {
         />
         <span>{errors?.password1?.message}</span>
         <button>Add</button>
+        <span>{errors?.extraError?.message}</span>
       </form>
     </div>
   );
