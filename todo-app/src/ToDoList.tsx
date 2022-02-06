@@ -31,30 +31,63 @@ import {useForm} from 'react-hook-form';
 //   );
 // };
 
+interface IForm {
+  email: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  password1: string;
+}
+
 // react-hook-form 활용
 const ToDoList = () => {
-  const {register, watch, handleSubmit, formState} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<IForm>({
+    defaultValues: {
+      email: '@gmail.com',
+    },
+  });
   // console.log(register('test')); // {name: 'test', onChange: ƒ, onBlur: ƒ, ref: ƒ}
 
   const onValid = (data: any) => {
     // console.log(data);
   };
 
-  console.log(formState.errors);
-
   return (
     <div>
       <form style={{display: 'flex', flexDirection: 'column'}} onSubmit={handleSubmit(onValid)}>
-        <input {...register('email', {required: true})} placeholder={'Email'} />
-        <input {...register('firstName', {required: true})} placeholder={'First Name'} />
-        <input {...register('lastName', {required: true})} placeholder={'Last Name'} />
-        <input {...register('username', {required: true, minLength: 5})} placeholder={'Username'} />
-        <input {...register('password', {required: true, minLength: 5})} placeholder={'Password'} />
+        <input
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Za-z0-9._%+-]+@gmail.com$/,
+              message: 'Only gmail.com emails allowed',
+            },
+          })}
+          placeholder={'Email'}
+        />
+        <input {...register('firstName', {required: 'write here'})} placeholder={'First Name'} />
+        <input {...register('lastName', {required: 'write here'})} placeholder={'Last Name'} />
+        <input {...register('username', {required: 'write here', minLength: 8})} placeholder={'Username'} />
         <input
           {...register('password', {
-            required: true,
+            required: 'Password is required',
             minLength: {
-              value: 5,
+              value: 8,
+              message: 'Your password is too short',
+            },
+          })}
+          placeholder={'Password'}
+        />
+        <input
+          {...register('password', {
+            required: 'Password is required',
+            minLength: {
+              value: 8,
               message: 'Your password is too short',
             },
           })}
