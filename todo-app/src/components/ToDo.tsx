@@ -1,7 +1,7 @@
 import {IToDo, toDoState} from '../atoms';
 import {useSetRecoilState} from 'recoil';
 
-const ToDo = ({text, category}: IToDo) => {
+const ToDo = ({text, category, id}: IToDo) => {
   const setToDos = useSetRecoilState(toDoState);
 
   // onClick 항목에서 변수를 넘겨줘야하는 형태
@@ -10,13 +10,13 @@ const ToDo = ({text, category}: IToDo) => {
   // 컴포넌트에 name 이라는 속성 부여해서 판단한하는 형태
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
-      currentTarget: {name, id},
+      currentTarget: {name},
     } = event;
 
     setToDos(oldToDos => {
-      const targetIndex = oldToDos.findIndex(todo => todo.id + '' === id);
-      const newToDo = {text, id, category: name};
-      return oldToDos;
+      const targetIndex = oldToDos.findIndex(todo => todo.id === id);
+      const newToDo = {text, id, category: name as IToDo['category']};
+      return [...oldToDos.slice(0, targetIndex), newToDo, ...oldToDos.slice(targetIndex + 1)];
     });
   };
 
