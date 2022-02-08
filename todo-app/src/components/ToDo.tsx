@@ -1,15 +1,23 @@
-import {IToDo} from '../atoms';
+import {IToDo, toDoState} from '../atoms';
+import {useSetRecoilState} from 'recoil';
 
 const ToDo = ({text, category}: IToDo) => {
+  const setToDos = useSetRecoilState(toDoState);
+
   // onClick 항목에서 변수를 넘겨줘야하는 형태
   // const onClick = (newCategory: IToDo['category']) => {};
 
   // 컴포넌트에 name 이라는 속성 부여해서 판단한하는 형태
   const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const {
-      currentTarget: {name},
+      currentTarget: {name, id},
     } = event;
-    console.log(name);
+
+    setToDos(oldToDos => {
+      const targetIndex = oldToDos.findIndex(todo => todo.id + '' === id);
+      const newToDo = {text, id, category: name};
+      return oldToDos;
+    });
   };
 
   return (
