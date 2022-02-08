@@ -6,6 +6,11 @@ export interface IToDo {
   category: 'TODO' | 'DOING' | 'DONE';
 }
 
+export const categoryState = atom<IToDo['category']>({
+  key: 'category',
+  default: 'TODO',
+});
+
 export const toDoState = atom<IToDo[]>({
   key: 'toDo',
   default: [],
@@ -15,11 +20,8 @@ export const toDoSelector = selector({
   key: 'toDoSelector',
   get: ({get}) => {
     const toDos = get(toDoState);
-    return [
-      toDos.filter(toDo => toDo.category === 'TODO'),
-      toDos.filter(toDo => toDo.category === 'DOING'),
-      toDos.filter(toDo => toDo.category === 'DONE'),
-    ];
+    const category = get(categoryState);
+    return toDos.filter(toDdo => toDdo.category === category);
   },
 });
 
