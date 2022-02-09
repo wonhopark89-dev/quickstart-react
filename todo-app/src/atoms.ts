@@ -32,3 +32,15 @@ export const toDoSelector = selector({
 });
 
 // atom 이 변하면 selector 도 변함
+export const minuteState = atom({
+  key: 'minutes',
+  default: 0,
+});
+
+export const hourSelector = selector({
+  key: 'hours',
+  get: ({get}) => {
+    const minutes = get(minuteState);
+    return minutes / 60;
+  },
+});

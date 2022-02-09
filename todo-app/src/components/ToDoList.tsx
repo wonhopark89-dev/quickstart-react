@@ -1,5 +1,5 @@
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Categories, categoryState, toDoSelector} from '../atoms';
+import {Categories, categoryState, hourSelector, minuteState, toDoSelector} from '../atoms';
 import CreateToDo from './CreateToDo';
 import ToDo from './ToDo';
 
@@ -14,6 +14,13 @@ const ToDoList = () => {
     setCategory(value as Categories);
   };
 
+  //
+  const [minutes, setMinutes] = useRecoilState(minuteState);
+  const hours = useRecoilValue(hourSelector);
+  const onMinutesChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setMinutes(+event.currentTarget.value);
+  };
+  //
   return (
     <div>
       <h1>To Dos</h1>
@@ -27,6 +34,11 @@ const ToDoList = () => {
       {toDos?.map(item => (
         <ToDo key={item.id} {...item} />
       ))}
+
+      <div>
+        <input value={minutes} onChange={onMinutesChange} type="number" placeholder="Minutes" />
+        <input value={hours} type="number" placeholder="Hours" />
+      </div>
     </div>
   );
 };

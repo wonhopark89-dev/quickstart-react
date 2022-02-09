@@ -2,7 +2,7 @@
 - react-hook-form
   - 정규식으로 체크 가능
 
-
+- localstorage, delete 적용해보기
 ----
 ## Available Scripts
 ### `yarn start`
