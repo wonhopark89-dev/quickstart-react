@@ -1,5 +1,5 @@
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {categoryState, IToDo, toDoSelector} from '../atoms';
+import {Categories, categoryState, toDoSelector} from '../atoms';
 import CreateToDo from './CreateToDo';
 import ToDo from './ToDo';
 
@@ -11,7 +11,7 @@ const ToDoList = () => {
     const {
       currentTarget: {value},
     } = event;
-    setCategory(value as IToDo['category']);
+    setCategory(value as Categories);
   };
 
   return (
@@ -19,9 +19,9 @@ const ToDoList = () => {
       <h1>To Dos</h1>
       <hr />
       <select value={category} onInput={onInput}>
-        <option value={'TODO'}>To Do</option>
-        <option value={'DOING'}>Doing</option>
-        <option value={'DONE'}>Done</option>
+        <option value={Categories.TODO}>To Do</option>
+        <option value={Categories.DOING}>Doing</option>
+        <option value={Categories.DONE}>Done</option>
       </select>
       <CreateToDo />
       {toDos?.map(item => (
