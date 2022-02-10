@@ -3,6 +3,7 @@ import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import {ReactQueryDevtools} from 'react-query/devtools';
 import {darkTheme} from './theme';
 import ToDoList from './components/ToDoList';
+import Dnd from './components/Dnd';
 
 // https://github.com/zacanger/styled-reset/blob/master/src/index.ts
 const GlobalStyle = createGlobalStyle`
@@ -77,7 +78,8 @@ function App() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyle />
-        <ToDoList />
+        {/*<ToDoList />*/}
+        <Dnd />
         <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
     </>
