@@ -8,13 +8,21 @@ const Dnd = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div>
         <Droppable droppableId={'one'}>
-          {() => (
-            <ul>
+          {({innerRef, droppableProps}) => (
+            <ul ref={innerRef} {...droppableProps}>
               <Draggable draggableId={'first'} index={0}>
-                {() => <li>One</li>}
+                {({innerRef, draggableProps, dragHandleProps}) => (
+                  <li ref={innerRef} {...draggableProps}>
+                    <span {...dragHandleProps}>🔥</span>One
+                  </li>
+                )}
               </Draggable>
-              <Draggable draggableId={'first'} index={0}>
-                {() => <li>Two</li>}
+              <Draggable draggableId={'two'} index={1}>
+                {({innerRef, draggableProps, dragHandleProps}) => (
+                  <li ref={innerRef} {...draggableProps}>
+                    <span {...dragHandleProps}>🔥</span>Two
+                  </li>
+                )}
               </Draggable>
             </ul>
           )}

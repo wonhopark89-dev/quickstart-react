@@ -3,6 +3,12 @@
   - 정규식으로 체크 가능
 
 - localstorage, delete 적용해보기
+
+- react-beautiful-dnd  
+[DragDropContext](https://github.com/atlassian/react-beautiful-dnd/blob/HEAD/docs/api/drag-drop-context.md)  
+[Droppable](https://github.com/atlassian/react-beautiful-dnd/blob/HEAD/docs/api/droppable.md)  
+[Draggable](https://github.com/atlassian/react-beautiful-dnd/blob/HEAD/docs/api/draggable.md)  
+
 ----
 ## Available Scripts
 ### `yarn start`
