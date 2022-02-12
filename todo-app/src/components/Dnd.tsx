@@ -1,35 +1,68 @@
 import React from 'react';
 import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const Boards = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(1, 1fr); // todo : will be 3
+`;
+
+const Board = styled.div`
+  padding: 20px 10px;
+  background-color: ${props => props.theme.boardColor};
+  border-radius: 5px;
+  min-height: 200px;
+`;
+
+const Card = styled.div`
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: ${props => props.theme.cardColor};
+`;
+
+const toDos = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 const Dnd = () => {
   const onDragEnd = () => {};
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div>
-        <Droppable droppableId={'one'}>
-          {({innerRef, droppableProps}) => (
-            <ul ref={innerRef} {...droppableProps}>
-              <Draggable draggableId={'first'} index={0}>
-                {({innerRef, draggableProps, dragHandleProps}) => (
-                  <li ref={innerRef} {...draggableProps}>
-                    <span {...dragHandleProps}>🔥</span>One
-                  </li>
-                )}
-              </Draggable>
-              <Draggable draggableId={'two'} index={1}>
-                {({innerRef, draggableProps, dragHandleProps}) => (
-                  <li ref={innerRef} {...draggableProps}>
-                    <span {...dragHandleProps}>🔥</span>Two
-                  </li>
-                )}
-              </Draggable>
-            </ul>
-          )}
-        </Droppable>
-      </div>
+      <Wrapper>
+        <Boards>
+          <Droppable droppableId={'one'}>
+            {({innerRef, droppableProps, placeholder}) => (
+              <Board ref={innerRef} {...droppableProps}>
+                {toDos.map((toDo, index) => (
+                  <Draggable draggableId={toDo} index={index}>
+                    {({innerRef, draggableProps, dragHandleProps}) => (
+                      <Card ref={innerRef} {...draggableProps} {...dragHandleProps}>
+                        {toDo}
+                      </Card>
+                    )}
+                  </Draggable>
+                ))}
+                {placeholder}
+              </Board>
+            )}
+          </Droppable>
+        </Boards>
+      </Wrapper>
     </DragDropContext>
   );
 };
 
 export default Dnd;
+
+// placeholder 가 drag 를 하는 동안 크기가 달라지지 않게 유지

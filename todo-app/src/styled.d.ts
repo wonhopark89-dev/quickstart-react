@@ -6,9 +6,9 @@ import 'styled-components';
 // override
 declare module 'styled-components' {
   export interface DefaultTheme {
-    textColor: string;
     bgColor: string;
-    accentColor: string;
-    cardBgColor: string;
+    textColor: string;
+    cardColor: string;
+    boardColor: string;
   }
 }
