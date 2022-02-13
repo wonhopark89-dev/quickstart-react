@@ -36,8 +36,25 @@ const Card = styled.div`
 
 const Dnd = () => {
   const [toDos, setToDos] = useRecoilState(toDoState);
-  const onDragEnd = ({destination, source}: DropResult) => {
+  const onDragEnd = ({destination, source, draggableId}: DropResult) => {
     console.log(destination, source);
+    if (!destination) {
+      return;
+    }
+
+    setToDos(oldToDos => {
+      const toDosCopy = [...oldToDos];
+      // 1) Delete item on source.index
+      console.log('Delete item on ', source.index);
+      console.log(toDosCopy);
+      toDosCopy.splice(source.index, 1); // 선택한거 삭제
+      console.log(toDosCopy);
+      // 2) Put back the item on destination.index
+      console.log('Put back ', draggableId, ' on ', destination.index);
+      toDosCopy.splice(destination?.index, 0, draggableId); // 집어 넣기
+      console.log(toDosCopy);
+      return toDosCopy;
+    });
   };
 
   return (
@@ -48,7 +65,7 @@ const Dnd = () => {
             {({innerRef, droppableProps, placeholder}) => (
               <Board ref={innerRef} {...droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <Draggable key={index} draggableId={toDo} index={index}>
+                  <Draggable key={toDo} draggableId={toDo} index={index}>
                     {({innerRef, draggableProps, dragHandleProps}) => (
                       <Card ref={innerRef} {...draggableProps} {...dragHandleProps}>
                         {toDo}
