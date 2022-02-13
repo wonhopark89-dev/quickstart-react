@@ -1,8 +1,9 @@
 import React from 'react';
-import {DragDropContext, Draggable, Droppable, DropResult} from 'react-beautiful-dnd';
+import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
 import {toDoState} from '../dndAtoms';
+import DragabbleCard from './DragabbleCard';
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,13 +26,6 @@ const Board = styled.div`
   background-color: ${props => props.theme.boardColor};
   border-radius: 5px;
   min-height: 200px;
-`;
-
-const Card = styled.div`
-  border-radius: 5px;
-  margin-bottom: 5px;
-  padding: 10px;
-  background-color: ${props => props.theme.cardColor};
 `;
 
 const Dnd = () => {
@@ -65,13 +59,7 @@ const Dnd = () => {
             {({innerRef, droppableProps, placeholder}) => (
               <Board ref={innerRef} {...droppableProps}>
                 {toDos.map((toDo, index) => (
-                  <Draggable key={toDo} draggableId={toDo} index={index}>
-                    {({innerRef, draggableProps, dragHandleProps}) => (
-                      <Card ref={innerRef} {...draggableProps} {...dragHandleProps}>
-                        {toDo}
-                      </Card>
-                    )}
-                  </Draggable>
+                  <DragabbleCard key={toDo} toDo={toDo} index={index} />
                 ))}
                 {placeholder}
               </Board>
