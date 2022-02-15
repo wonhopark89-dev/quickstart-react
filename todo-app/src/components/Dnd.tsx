@@ -72,3 +72,19 @@ const Dnd = () => {
 export default Dnd;
 
 // placeholder 가 drag 를 하는 동안 크기가 달라지지 않게 유지
+
+// Droppablestate snapshot
+//
+// 현재 선택한 Draggable이 특정 Droppable위에 드래깅 되고 있는지 여부 확인
+// isDraggingOver: boolean,
+//
+// Droppable 위로 드래그하는 Draggable ID
+// draggingOverWith: ?DraggableId,
+//
+// 현재 Droppable에서 벗어난 드래깅되고 있는 Draggable ID
+// draggingFromThisWith: ?DraggableId,
+//
+// placeholder가 사용되고 있는지 여부
+// isUsingPlaceholder: boolean,
+//
+// https://github.com/atlassian/react-beautiful-dnd/blob/HEAD/docs/api/droppable.md#2-snapshot-droppablestatesnapshot

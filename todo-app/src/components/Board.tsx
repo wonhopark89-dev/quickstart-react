@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.boardColor};
   border-radius: 5px;
   min-height: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Title = styled.h2`
@@ -17,6 +19,17 @@ const Title = styled.h2`
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 18px;
+`;
+
+interface IAreaProps {
+  isDraggingFromThis: boolean;
+  isDraggingOver: boolean;
+}
+
+const Area = styled.div<IAreaProps>`
+  background-color: ${props => (props.isDraggingOver ? 'pink' : props.isDraggingFromThis ? 'red' : 'blue')};
+  flex-grow: 1;
+  transition: background-color 0.3s ease-in-out;
 `;
 
 interface IBoardProps {
@@ -29,13 +42,17 @@ const Board = ({toDos, boardId}: IBoardProps) => {
     <Wrapper>
       <Title>{boardId}</Title>
       <Droppable droppableId={boardId}>
-        {({innerRef, droppableProps, placeholder}) => (
-          <div ref={innerRef} {...droppableProps}>
+        {({innerRef, droppableProps, placeholder}, {isDraggingOver, draggingFromThisWith}) => (
+          <Area
+            isDraggingOver={isDraggingOver}
+            isDraggingFromThis={Boolean(draggingFromThisWith)} // 존재하면 true 가 됨
+            ref={innerRef}
+            {...droppableProps}>
             {toDos.map((toDo, index) => (
               <DragabbleCard key={toDo} toDo={toDo} index={index} />
             ))}
             {placeholder}
-          </div>
+          </Area>
         )}
       </Droppable>
     </Wrapper>
