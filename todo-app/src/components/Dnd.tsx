@@ -7,8 +7,7 @@ import Board from './Board';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 800px;
-  width: 100%;
+  width: 100vw;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
@@ -16,10 +15,11 @@ const Wrapper = styled.div`
 `;
 
 const Boards = styled.div`
-  display: grid;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
   gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
 `;
 
 const Dnd = () => {
@@ -30,19 +30,18 @@ const Dnd = () => {
       return;
     }
 
-    // setToDos(oldToDos => {
-    //   const toDosCopy = [...oldToDos];
-    //   // 1) Delete item on source.index
-    //   console.log('Delete item on ', source.index);
-    //   console.log(toDosCopy);
-    //   toDosCopy.splice(source.index, 1); // 선택한거 삭제
-    //   console.log(toDosCopy);
-    //   // 2) Put back the item on destination.index
-    //   console.log('Put back ', draggableId, ' on ', destination.index);
-    //   toDosCopy.splice(destination?.index, 0, draggableId); // 집어 넣기
-    //   console.log(toDosCopy);
-    //   return toDosCopy;
-    // });
+    if (destination?.droppableId === source.droppableId) {
+      // same board movement.
+      setToDos(allBoards => {
+        const boardCopy = [...allBoards[source.droppableId]];
+        boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination?.index, 0, draggableId);
+        return {
+          ...allBoards,
+          [source.droppableId]: boardCopy,
+        };
+      });
+    }
   };
 
   return (
