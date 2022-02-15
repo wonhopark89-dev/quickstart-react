@@ -1,13 +1,13 @@
 import React from 'react';
-import {DragDropContext, Droppable, DropResult} from 'react-beautiful-dnd';
+import {DragDropContext, DropResult} from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
 import {toDoState} from '../dndAtoms';
-import DragabbleCard from './DragabbleCard';
+import Board from './Board';
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 480px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   justify-content: center;
@@ -18,14 +18,8 @@ const Wrapper = styled.div`
 const Boards = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(1, 1fr); // todo : will be 3
-`;
-
-const Board = styled.div`
-  padding: 20px 10px;
-  background-color: ${props => props.theme.boardColor};
-  border-radius: 5px;
-  min-height: 200px;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 const Dnd = () => {
@@ -36,35 +30,28 @@ const Dnd = () => {
       return;
     }
 
-    setToDos(oldToDos => {
-      const toDosCopy = [...oldToDos];
-      // 1) Delete item on source.index
-      console.log('Delete item on ', source.index);
-      console.log(toDosCopy);
-      toDosCopy.splice(source.index, 1); // 선택한거 삭제
-      console.log(toDosCopy);
-      // 2) Put back the item on destination.index
-      console.log('Put back ', draggableId, ' on ', destination.index);
-      toDosCopy.splice(destination?.index, 0, draggableId); // 집어 넣기
-      console.log(toDosCopy);
-      return toDosCopy;
-    });
+    // setToDos(oldToDos => {
+    //   const toDosCopy = [...oldToDos];
+    //   // 1) Delete item on source.index
+    //   console.log('Delete item on ', source.index);
+    //   console.log(toDosCopy);
+    //   toDosCopy.splice(source.index, 1); // 선택한거 삭제
+    //   console.log(toDosCopy);
+    //   // 2) Put back the item on destination.index
+    //   console.log('Put back ', draggableId, ' on ', destination.index);
+    //   toDosCopy.splice(destination?.index, 0, draggableId); // 집어 넣기
+    //   console.log(toDosCopy);
+    //   return toDosCopy;
+    // });
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Wrapper>
         <Boards>
-          <Droppable droppableId={'one'}>
-            {({innerRef, droppableProps, placeholder}) => (
-              <Board ref={innerRef} {...droppableProps}>
-                {toDos.map((toDo, index) => (
-                  <DragabbleCard key={toDo} toDo={toDo} index={index} />
-                ))}
-                {placeholder}
-              </Board>
-            )}
-          </Droppable>
+          {Object.keys(toDos).map((boardId, index) => (
+            <Board key={`_${boardId}`} toDos={toDos[boardId]} boardId={boardId} />
+          ))}
         </Boards>
       </Wrapper>
     </DragDropContext>

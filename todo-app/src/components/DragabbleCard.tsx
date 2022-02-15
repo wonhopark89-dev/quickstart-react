@@ -15,9 +15,9 @@ interface IDragbbleCardProps {
 }
 
 const DragabbleCard = React.memo(({toDo, index}: IDragbbleCardProps) => {
-  console.log(toDo, 'has been rendered');
+  // console.log(toDo, 'has been rendered');
   return (
-    <Draggable key={toDo} draggableId={toDo} index={index}>
+    <Draggable draggableId={toDo} index={index}>
       {({innerRef, draggableProps, dragHandleProps}) => (
         <Card ref={innerRef} {...draggableProps} {...dragHandleProps}>
           {toDo}
