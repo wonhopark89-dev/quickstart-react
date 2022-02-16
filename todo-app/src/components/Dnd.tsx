@@ -36,8 +36,8 @@ const Dnd = () => {
         // 수정이 발생한 보드만 복사
         const boardCopy = [...allBoards[source.droppableId]];
         // delete item
-        const target = boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination?.index, 0, ...target);
+        const taskObj = boardCopy.splice(source.index, 1);
+        boardCopy.splice(destination?.index, 0, ...taskObj);
         return {
           ...allBoards,
           [source.droppableId]: boardCopy,
@@ -50,8 +50,8 @@ const Dnd = () => {
       setToDos(allBoards => {
         const sourceBoard = [...allBoards[source.droppableId]];
         const destinationBoard = [...allBoards[destination.droppableId]];
-        const target = sourceBoard.splice(source.index, 1);
-        destinationBoard.splice(destination.index, 0, ...target);
+        const taskObj = sourceBoard.splice(source.index, 1);
+        destinationBoard.splice(destination.index, 0, ...taskObj);
         return {...allBoards, [source.droppableId]: sourceBoard, [destination.droppableId]: destinationBoard};
       });
     }

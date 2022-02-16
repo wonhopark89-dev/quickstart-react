@@ -2,8 +2,9 @@ import React from 'react';
 import DragabbleCard from './DragabbleCard';
 import {Droppable} from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import {IToDo} from '../dndAtoms';
+import {IToDo, toDoState} from '../dndAtoms';
 import {useForm} from 'react-hook-form';
+import {useSetRecoilState} from 'recoil';
 
 const Wrapper = styled.div`
   width: 300px;
@@ -53,7 +54,16 @@ interface IBoardProps {
 
 const Board = ({toDos, boardId}: IBoardProps) => {
   const {register, setValue, handleSubmit} = useForm<IForm>();
+  const setToDos = useSetRecoilState(toDoState);
   const onValid = ({toDo}: IForm) => {
+    const newTodo: IToDo = {id: Date.now(), content: toDo};
+    // 해당하는 보드에만 업데이트 하도록
+    setToDos(allBoards => {
+      return {
+        ...allBoards,
+        [boardId]: [newTodo, ...allBoards[boardId]],
+      };
+    });
     setValue('toDo', '');
   };
   return (
