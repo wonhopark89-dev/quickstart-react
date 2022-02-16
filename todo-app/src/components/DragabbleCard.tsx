@@ -11,17 +11,17 @@ const Card = styled.div<{isDragging: boolean}>`
 `;
 
 interface IDragbbleCardProps {
-  toDo: string;
+  toDo: {id: number; content: string};
   index: number;
 }
 
-const DragabbleCard = React.memo(({toDo, index}: IDragbbleCardProps) => {
+const DragabbleCard = React.memo(({toDo: {id, content}, index}: IDragbbleCardProps) => {
   // console.log(toDo, 'has been rendered');
   return (
-    <Draggable draggableId={toDo} index={index}>
+    <Draggable draggableId={id + ''} index={index}>
       {({innerRef, draggableProps, dragHandleProps}, {isDragging}) => (
         <Card isDragging={isDragging} ref={innerRef} {...draggableProps} {...dragHandleProps}>
-          {toDo}
+          {content}
         </Card>
       )}
     </Draggable>
